@@ -63,23 +63,23 @@ Route::get('user/checkout', function () {
 })->name('user.checkout');
 
 // Dashboard
-Route::get('/dashboard', function () {
+Route::get('admin/dashboard', function () {
     return view('admin.dashboard');
-})->name('dashboard.index');
+})->name('admin.dashboard');
 
 // Customers
-Route::get('/customers', function () {
+Route::get('admin/customers', function () {
     return view('admin.customers');
-})->name('customers.index');
+})->name('admin.customers');
 
 // Products
-Route::get('/products', function () {
+Route::get('admin/products', function () {
     return view('admin.products');
-})->name('products.index');
+})->name('admin.products');
 
 // Promo
-Route::get('/promo', function () {
+Route::get('admin/promo', function () {
     return view('admin.promo');
-})->name('promo.index');
+})->name('admin.promo');
 
 require __DIR__.'/auth.php';

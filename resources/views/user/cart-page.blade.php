@@ -2,7 +2,7 @@
 @section('content')
 <div class="font-poppins bg-white text-gray-800 min-h-screen">
     <div class="max-w-6xl mx-auto px-4 py-8">
-        <h1 class="text-2xl font-bold mb-6 flex items-center gap-3 text-gray-800">
+        <h1 class="text-2xl font-bold mb-6 flex items-center gap-3 text-red-600">
             <i class="fa-solid fa-cart-shopping text-red-600"></i>
             Keranjang Belanja
         </h1>
@@ -57,13 +57,53 @@
             <div class="text-right">
                 <p class="text-sm">Total (2 Produk)</p>
                 <p class="text-xl font-bold text-red-600">Rp 13.000</p>
-                <a href="{{ route('user.checkout') }}" class="bg-red-600 text-white px-6 py-2 mt-2 rounded-xl font-semibold hover:bg-red-700 block text-center">
-            Checkout
-        </a>
+                <button id="btn-checkout" class="bg-red-600 text-white px-6 py-2 mt-2 rounded-xl font-semibold hover:bg-red-700 block text-center">
+                    Checkout
+                </button>
+
             </div>
         </div>
     </div>
 </div>
+
+
+
 @endsection
+
+@push('scripts')
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const checkoutBtn = document.getElementById('btn-checkout');
+
+        if (checkoutBtn) {
+            checkoutBtn.addEventListener('click', function (e) {
+                e.preventDefault();
+
+                const anyChecked = Array.from(document.querySelectorAll('input[type="checkbox"]'))
+                    .some(checkbox => checkbox.checked);
+
+                if (!anyChecked) {
+                    Swal.fire({
+                        icon: 'warning',
+                        title: 'Produk Belum Dipilih',
+                        text: 'Silakan pilih minimal satu produk untuk melanjutkan checkout.',
+                        confirmButtonColor: '#e3342f',
+                        confirmButtonText: 'OK',
+                        customClass: {
+                            popup: 'rounded-xl',
+                            text: 'text-slate-700 text-md',
+                            title: 'font-semibold text-slate-700 text-2xl',
+                            confirmButton: 'text-sm px-6 py-2 rounded-md'
+                        }
+                    });
+                } else {
+                    // Jika ada produk yang dipilih, lanjutkan ke halaman checkout
+                    window.location.href = "{{ route('user.checkout') }}";
+                }
+            });
+        }
+    });
+</script>
+@endpush
 
 </x-app-layout>

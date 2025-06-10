@@ -35,22 +35,31 @@
 
     <!-- Menu -->
 <nav class="flex flex-col space-y-6">
-  <a href="{{ route('dashboard.index') }}" class="flex items-center space-x-4 text-gray-700 hover:text-pink-600">
+  <a href="{{ route('admin.dashboard') }}" class="flex items-center space-x-4 text-gray-700 hover:text-pink-600">
     <span>🏠</span>
     <span class="menu-text">Dashboard</span>
   </a>
-  <a href="{{ route('customers.index') }}" class="flex items-center space-x-4 text-pink-600 font-semibold">
+  <a href="{{ route('admin.customers') }}" class="flex items-center space-x-4 text-pink-600 font-semibold">
     <span>👥</span>
     <span class="menu-text">Customers</span>
   </a>
-  <a href="{{ route('products.index') }}" class="flex items-center space-x-4 text-gray-700 hover:text-pink-600">
+  <a href="{{ route('admin.products') }}" class="flex items-center space-x-4 text-gray-700 hover:text-pink-600">
     <span>👜</span>
     <span class="menu-text">Products</span>
   </a>
-  <a href="{{ route('promo.index') }}" class="flex items-center space-x-4 text-gray-700 hover:text-pink-600">
+  <a href="{{ route('admin.promo') }}" class="flex items-center space-x-4 text-gray-700 hover:text-pink-600">
     <span>💸</span>
     <span class="menu-text">Promo</span>
   </a>
+    <!-- Logout Button -->
+  <form action="{{ route('logout') }}" method="POST" class="mt-10">
+    @csrf
+    <button type="submit" class="flex items-center space-x-4 text-gray-700 hover:text-red-600">
+      <span>🚪</span>
+      <span class="menu-text">Logout</span>
+    </button>
+  </form>
+</nav>
 </nav>
   </div>
 
@@ -62,7 +71,7 @@
 <h1 class="text-2xl font-bold text-[#AF1740]">Customers</h1>
 
     <div class="p-6">
-         <form action="{{ route('customers.index') }}" method="GET" class="flex items-center">
+         <form action="{{ route('admin.customers') }}" method="GET" class="flex items-center">
       <input
         type="text"
         name="search"

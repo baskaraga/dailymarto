@@ -38,19 +38,19 @@
     <!-- Menu -->
 <!-- Menu -->
 <nav class="flex flex-col space-y-6">
-  <a href="{{ route('dashboard.index') }}" class="flex items-center space-x-4 text-pink-600 font-semibold">
+  <a href="{{ route('admin.dashboard') }}" class="flex items-center space-x-4 text-pink-600 font-semibold">
     <span>🏠</span>
     <span class="menu-text">Dashboard</span>
   </a>
-  <a href="{{ route('customers.index') }}" class="flex items-center space-x-4 text-gray-700 hover:text-pink-600">
+  <a href="{{ route('admin.customers') }}" class="flex items-center space-x-4 text-gray-700 hover:text-pink-600">
     <span>👥</span>
     <span class="menu-text">Customers</span>
   </a>
-  <a href="{{ route('products.index') }}" class="flex items-center space-x-4 text-gray-700 hover:text-pink-600">
+  <a href="{{ route('admin.products') }}" class="flex items-center space-x-4 text-gray-700 hover:text-pink-600">
     <span>👜</span>
     <span class="menu-text">Products</span>
   </a>
-  <a href="{{ route('promo.index') }}" class="flex items-center space-x-4 text-gray-700 hover:text-pink-600">
+  <a href="{{ route('admin.promo') }}" class="flex items-center space-x-4 text-gray-700 hover:text-pink-600">
     <span>💸</span>
     <span class="menu-text">Promo</span>
   </a>
@@ -126,7 +126,7 @@
       </table>
     </div>
     <div class="mt-4 text-right">
-      <a href="{{ route('customers.index') }}" class="text-sm text-pink-600 hover:underline">View More</a>
+      <a href="{{ route('admin.customers') }}" class="text-sm text-pink-600 hover:underline">View More</a>
     </div>
   </div>
 
@@ -176,7 +176,7 @@
       </table>
     </div>
     <div class="mt-4 text-right">
-      <a href="{{ route('products.index') }}" class="text-sm text-pink-600 hover:underline">View More</a>
+      <a href="{{ route('admin.products') }}" class="text-sm text-pink-600 hover:underline">View More</a>
     </div>
   </div>
 
@@ -223,7 +223,7 @@
       </table>
     </div>
     <div class="mt-4 text-right">
-      <a href="{{ route('promo.index') }}" class="text-sm text-pink-600 hover:underline">View More</a>
+      <a href="{{ route('admin.promo') }}" class="text-sm text-pink-600 hover:underline">View More</a>
     </div>
   </div>
 
