@@ -72,46 +72,45 @@
     <!-- Toggle Button -->
     <h1 class="text-2xl font-bold text-[#AF1740]">Tambah Kategori Barang</h1>
 
-    <div class="p-6">
-      <!-- form -->
-      <form action="{{ route('admin.categories.create') }}" method="POST" class="flex items-center">
-      <div class="max-w-md bg-white p-6 rounded-lg shadow-md">
-  <h2 class="text-xl font-semibold text-gray-800 mb-4">Tambah Kategori Baru</h2>
+    <div class="p-6 flex justify-center">
+  <div class="w-full max-w-xl bg-white p-6 rounded-lg shadow-md">
+    <h2 class="text-xl font-semibold text-gray-800 mb-6">Tambah Kategori Baru</h2>
 
-  <form action="{{ route('admin.categories.store') }}" method="POST" class="space-y-5">
-    @csrf
+    <form action="{{ route('admin.categories.store') }}" method="POST" class="space-y-6">
+      @csrf
 
-    <!-- Input Nama Kategori -->
-    <div>
-      <label for="nama_kategori" class="block text-sm font-medium text-gray-700 mb-1">
-        Nama Kategori
-      </label>
-      <input
-        type="text"
-        name="nama_kategori"
-        id="nama_kategori"
-        required
-        placeholder="Contoh: Minuman"
-        class="w-full border border-gray-300 rounded-lg px-4 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-[#AF1740] focus:border-transparent"
-      />
-    </div>
+      <!-- Input Nama Kategori -->
+      <div class="flex items-center space-x-4">
+        <label for="nama_kategori" class="w-90 text-sm font-medium text-gray-1000">
+          Nama Kategori:
+        </label>
+        <input
+          type="text"
+          name="nama_kategori"
+          id="nama_kategori"
+          required
+          placeholder="Contoh: Minuman"
+          class="flex-1 border border-gray-300 rounded-lg px-4 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-[#AF1740] focus:border-transparent"
+        />
+      </div>
 
-    <!-- Tombol Aksi -->
-    <div class="flex items-center justify-between">
-      <button
-        type="submit"
-        class="bg-[#AF1740] hover:bg-[#991430] text-white font-medium px-5 py-2 rounded-lg shadow-md transition duration-200"
-      >
-        Simpan
-      </button>
-      <a
-        href="{{ route('admin.categories.index') }}"
-        class="text-sm text-gray-600 hover:text-[#AF1740] hover:underline transition"
-      >
-        Batal
-      </a>
-    </div>
-  </form>
+      <!-- Tombol Aksi -->
+      <div class="pt-4 flex justify-end space-x-4">
+        <button
+          type="submit"
+          class="bg-[#AF1740] hover:bg-[#991430] text-white font-medium px-5 py-2 rounded-lg shadow-md transition duration-200"
+        >
+          Simpan
+        </button>
+        <a
+          href="{{ route('admin.categories.index') }}"
+          class="text-sm text-gray-600 hover:text-[#AF1740] hover:underline transition py-2"
+        >
+          Batal
+        </a>
+      </div>
+    </form>
+  </div>
 </div>
 
 

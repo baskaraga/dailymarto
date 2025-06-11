@@ -39,11 +39,11 @@
     <span>🏠</span>
     <span class="menu-text">Dashboard</span>
   </a>
-  <a href="{{ route('admin.customers') }}" class="flex items-center space-x-4 text-pink-600 font-semibold">
+  <a href="{{ route('admin.customers') }}" class="flex items-center space-x-4 text-gray-700 hover:text-pink-600">
     <span>👥</span>
     <span class="menu-text">Customers</span>
   </a>
-  <a href="{{ route('admin.products.index') }}" class="flex items-center space-x-4 text-gray-700 hover:text-pink-600">
+  <a href="{{ route('admin.products.index') }}" class="flex items-center space-x-4 text-pink-600 font-semibold">
     <span>👜</span>
     <span class="menu-text">Products</span>
   </a>
@@ -72,67 +72,78 @@
     <!-- Toggle Button -->
 
 
-<h1 class="text-2xl font-bold text-[#AF1740]">Customers</h1>
+<h1 class="text-2xl font-bold text-[#AF1740]">Products</h1>
+<div class="p-6">
+      <!-- Search -->
+      <form action="{{ route('admin.categories.index') }}" method="GET" class="flex items-center">
+        <input
+          type="text"
+          name="search"
+          value="{{ request('search') }}"
+          placeholder="Cari Barang..."
+          class="border border-gray-300 rounded-lg px-3 py-1.5 text-sm focus:outline-none focus:ring focus:border-blue-300"
+        />
+        <button
+          type="submit"
+          class="ml-2 bg-[#AF1740] text-white px-3 py-1.5 rounded-lg text-sm hover:bg-[#991430]"
+        >
+          Search
+        </button>
+      </form>
 
-    <div class="p-6">
-         <form action="{{ route('admin.customers') }}" method="GET" class="flex items-center">
-      <input
-        type="text"
-        name="search"
-        value="{{ request('search') }}"
-        placeholder="Search customers..."
-        class="border border-gray-300 rounded-lg px-3 py-1.5 text-sm focus:outline-none focus:ring focus:border-blue-300"
-      />
-<button
-  type="submit"
-  class="ml-2 bg-[#AF1740] text-white px-3 py-1.5 rounded-lg text-sm hover:bg-[#991430]"
->
-        Search
-      </button>
-    </form>
-<!-- Tombol Create Customer -->
-<p
-   class="fixed bottom-12 right-12 bg-[#AF1740] text-white px-4 py-2 rounded-lg text-sm shadow-lg hover:bg-[#991430] transition">
-   + Create Customer
-</p>
+      <!-- Create Button -->
+      <a
+        href="{{ route('admin.products.create') }}"
+        class="fixed bottom-12 right-12 bg-[#AF1740] text-white px-4 py-2 rounded-lg text-sm shadow-lg hover:bg-[#991430] transition"
+      >
+        + Create Product
+      </a>
 
-  <div class="overflow-x-auto">
-    <table class="min-w-full divide-y divide-gray-200">
-      <thead class="text-left text-sm text-gray-600 uppercase tracking-wider border-b border-gray-200">
-        <tr>
-          <th class="py-3">Name</th>
-          <th class="py-3">Email</th>
-          <th class="py-3">Phone</th>
-          <th class="py-3">Membership</th>
-          <th class="py-3">Action</th>
-        </tr>
-      </thead>
-      <tbody class="text-sm text-gray-800">
+      <!-- Table -->
+      <div class="overflow-x-auto mt-6">
+  <table class="min-w-full divide-y divide-gray-200">
+    <thead class="text-left text-sm text-gray-600 uppercase tracking-wider border-b border-gray-200">
+      <tr>
+        <th class="py-3">ID</th>
+        <th class="py-3">Nama</th>
+        <th class="py-3">Harga</th>
+        <th class="py-3">Stok</th>
+        <th class="py-3">Gambar</th>
+        <th class="py-3">Kategori</th>
+        <th class="py-3">Aksi</th>
+      </tr>
+    </thead>
+    <tbody class="text-sm text-gray-800">
+      @foreach ($barang as $item)
         <tr class="border-b border-gray-200 hover:bg-gray-50">
-          <td class="py-3">John Doe</td>
-          <td class="py-3">john@example.com</td>
-          <td class="py-3">08123456789</td>
-          <td class="py-3">Gold</td>
+          <td class="py-3">{{ $item->id_barang }}</td>
+          <td class="py-3">{{ $item->nama_barang }}</td>
+          <td class="py-3">Rp{{ number_format($item->harga, 0, ',', '.') }}</td>
+          <td class="py-3">{{ $item->stok }}</td>
           <td class="py-3">
-            <button class="text-blue-600 hover:underline">Edit</button>
-            <button class="text-red-600 hover:underline ml-2">Delete</button>
+            @if ($item->gambar)
+              <img src="{{ asset('storage/gambar/' . $item->gambar) }}" alt="Gambar" class="w-12 h-12 object-cover rounded">
+            @else
+              Tidak ada
+            @endif
+          </td>
+          <td class="py-3">{{ $item->kategori->nama_kategori ?? '-' }}</td>
+          <td class="py-3">
+            <a href="{{ route('admin.products.edit', $item->id_barang) }}" class="text-blue-600 hover:underline">Edit</a>
+            <form action="{{ route('admin.products.destroy', $item->id_barang) }}" method="POST" class="inline">
+              @csrf
+              @method('DELETE')
+              <button type="submit" onclick="return confirm('Yakin ingin hapus?')" class="text-red-600 hover:underline ml-2">Delete</button>
+            </form>
           </td>
         </tr>
-        <tr class="border-b border-gray-200 hover:bg-gray-50">
-          <td class="py-3">Jane Smith</td>
-          <td class="py-3">jane@example.com</td>
-          <td class="py-3">08987654321</td>
-          <td class="py-3">Silver</td>
-          <td class="py-3">
-            <button class="text-blue-600 hover:underline">Edit</button>
-            <button class="text-red-600 hover:underline ml-2">Delete</button>
-          </td>
-        </tr>
-        <!-- Tambah baris lain di sini -->
-      </tbody>
-    </table>
-  </div>
+      @endforeach
+    </tbody>
+  </table>
 </div>
+
+</div>
+  </div>
   </div>
 
   <script>

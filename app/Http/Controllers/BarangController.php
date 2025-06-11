@@ -11,14 +11,14 @@ class BarangController extends Controller
 {
     public function index()
     {
-        $barang = Barang::with('kategori')->get();
-        return view('barang.index', compact('barang'));
+        $barang = Barang::with('kategori')->get(); 
+        return view('admin.products.index', compact('barang'));
     }
 
     public function create()
     {
         $kategori = Kategori::all();
-        return view('barang.create', compact('kategori'));
+        return view('admin.products.create', compact('kategori'));
     }
 
     public function store(Request $request)
@@ -44,20 +44,18 @@ class BarangController extends Controller
             'gambar' => $gambarPath,
         ]);
 
-        return redirect()->route('barang.index')->with('success', 'Barang berhasil ditambahkan.');
+        return redirect()->route('admin.products.index')->with('success', 'Barang berhasil ditambahkan.');
     }
 
     public function edit($id)
     {
         $barang = Barang::findOrFail($id);
-        $kategori = Kategori::all();
-        return view('barang.edit', compact('barang', 'kategori'));
+        $kategoris = Kategori::all();
+        return view('admin.products.edit', compact('barang', 'kategoris'));
     }
 
     public function update(Request $request, $id)
     {
-        $barang = Barang::findOrFail($id);
-
         $request->validate([
             'nama_barang' => 'required|string|max:255',
             'harga' => 'required|numeric',
@@ -66,12 +64,11 @@ class BarangController extends Controller
             'gambar' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
         ]);
 
+        $barang = Barang::findOrFail($id);
+
+        $gambarPath = $barang->gambar;
         if ($request->hasFile('gambar')) {
-            // Hapus gambar lama jika ada
-            if ($barang->gambar) {
-                Storage::disk('public')->delete($barang->gambar);
-            }
-            $barang->gambar = $request->file('gambar')->store('barang', 'public');
+            $gambarPath = $request->file('gambar')->store('barang', 'public');
         }
 
         $barang->update([
@@ -79,10 +76,10 @@ class BarangController extends Controller
             'harga' => $request->harga,
             'stok' => $request->stok,
             'id_kategori' => $request->id_kategori,
-            'gambar' => $barang->gambar,
+            'gambar' => $gambarPath,
         ]);
 
-        return redirect()->route('barang.index')->with('success', 'Barang berhasil diperbarui.');
+        return redirect()->route('admin.products.index')->with('success', 'Barang berhasil diperbarui.');
     }
 
     public function destroy($id)
@@ -92,6 +89,6 @@ class BarangController extends Controller
             Storage::disk('public')->delete($barang->gambar);
         }
         $barang->delete();
-        return redirect()->route('barang.index')->with('success', 'Barang berhasil dihapus.');
+        return redirect()->route('admin.products.index')->with('success', 'Barang berhasil dihapus.');
     }
 }

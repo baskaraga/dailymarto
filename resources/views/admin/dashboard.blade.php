@@ -46,7 +46,7 @@
     <span>👥</span>
     <span class="menu-text">Customers</span>
   </a>
-  <a href="{{ route('admin.products') }}" class="flex items-center space-x-4 text-gray-700 hover:text-pink-600">
+  <a href="{{ route('admin.products.index') }}" class="flex items-center space-x-4 text-gray-700 hover:text-pink-600">
     <span>👜</span>
     <span class="menu-text">Products</span>
   </a>
@@ -179,7 +179,7 @@
       </table>
     </div>
     <div class="mt-4 text-right">
-      <a href="{{ route('admin.products') }}" class="text-sm text-pink-600 hover:underline">View More</a>
+      <a href="{{ route('admin.products.index') }}" class="text-sm text-pink-600 hover:underline">View More</a>
     </div>
   </div>
 

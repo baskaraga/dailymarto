@@ -43,7 +43,7 @@
     <span>👥</span>
     <span class="menu-text">Customers</span>
   </a>
-  <a href="{{ route('admin.products') }}" class="flex items-center space-x-4 text-gray-700 hover:text-pink-600">
+  <a href="{{ route('admin.products.index') }}" class="flex items-center space-x-4 text-gray-700 hover:text-pink-600">
     <span>👜</span>
     <span class="menu-text">Products</span>
   </a>

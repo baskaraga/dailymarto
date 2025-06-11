@@ -37,9 +37,7 @@ Route::get('/', function () {
 
 // Route untuk admin
 Route::middleware(['auth', 'role:admin'])->group(function () {
-    Route::get('/admin/dashboard', function () {
-        return view('admin.dashboard');
-    })->name('admin.dashboard');
+    Route::get('/admin/dashboard', [DashboardController::class, 'index'])->name('admin.dashboard');
 });
 
 // Route untuk user
@@ -75,9 +73,14 @@ Route::get('admin/customers', function () {
 })->name('admin.customers');
 
 // Products
-Route::get('admin/products', function () {
-    return view('admin.products');
-})->name('admin.products');
+Route::prefix('admin/products')->name('admin.products.')->group(function () {
+    Route::get('/', [BarangController::class, 'index'])->name('index');         
+    Route::get('/create', [BarangController::class, 'create'])->name('create'); 
+    Route::post('/', [BarangController::class, 'store'])->name('store');        
+    Route::get('/{id}/edit', [BarangController::class, 'edit'])->name('edit');  
+    Route::put('/{id}', [BarangController::class, 'update'])->name('update');   
+    Route::delete('/{id}', [BarangController::class, 'destroy'])->name('destroy'); 
+});
 
 // Promo
 Route::get('admin/promo', function () {
