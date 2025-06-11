@@ -54,7 +54,10 @@
     <span>💸</span>
     <span class="menu-text">Promo</span>
   </a>
-
+  <a href="{{ route('admin.categories.index') }}" class="flex items-center space-x-4 text-gray-700 hover:text-pink-600">
+    <span>📦</span>
+    <span class="menu-text">Kategori Barang</span>
+  </a>
   <!-- Logout Button -->
   <form action="{{ route('logout') }}" method="POST" class="mt-10">
     @csrf

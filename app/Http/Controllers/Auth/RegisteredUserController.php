@@ -32,6 +32,8 @@ class RegisteredUserController extends Controller
     {
         $request->validate([
             'name' => ['required', 'string', 'max:255'],
+            'username' => ['required', 'string', 'max:255', 'unique:users'],
+            'no_telp' => ['required', 'string', 'max:20'], 
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
             'role' => ['required', 'in:admin,user'],
@@ -39,14 +41,14 @@ class RegisteredUserController extends Controller
 
         $user = User::create([
             'name' => $request->name,
+            'username' => $request->username, 
+            'no_telp' => $request->no_telp,
             'email' => $request->email,
             'password' => Hash::make($request->password),
             'role' => $request->role,
         ]);
 
-        auth()->login($user);
-
-        return redirect(RouteServiceProvider::redirectToBasedOnRole());
+        return redirect()->route('login')->with('success', 'Registrasi berhasil! Silakan login.');
 
 }
 }

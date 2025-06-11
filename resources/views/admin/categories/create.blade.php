@@ -47,16 +47,15 @@
     <span>👜</span>
     <span class="menu-text">Products</span>
   </a>
-  <a href="{{ route('admin.promo') }}" class="flex items-center space-x-4 text-pink-600 font-semibold">
+  <a href="{{ route('admin.promo') }}" class="flex items-center space-x-4 text-gray-700 hover:text-pink-600">
     <span>💸</span>
     <span class="menu-text">Promo</span>
   </a>
-  <a href="{{ route('admin.categories.index') }}" class="flex items-center space-x-4 text-gray-700 hover:text-pink-600">
+  <a href="{{ route('admin.categories.index') }}" class="flex items-center space-x-4 text-pink-600 font-semibold">
     <span>📦</span>
     <span class="menu-text">Kategori Barang</span>
   </a>
-</nav>
-  <!-- Logout Button -->
+    <!-- Logout Button -->
   <form action="{{ route('logout') }}" method="POST" class="mt-10">
     @csrf
     <button type="submit" class="flex items-center space-x-4 text-gray-700 hover:text-red-600">
@@ -64,79 +63,57 @@
       <span class="menu-text">Logout</span>
     </button>
   </form>
-  
+</nav>
 </nav>
   </div>
 
   <!-- Main Content -->
   <div class="flex-1 p-6">
     <!-- Toggle Button -->
+    <h1 class="text-2xl font-bold text-[#AF1740]">Tambah Kategori Barang</h1>
 
-
-<h1 class="text-2xl font-bold text-[#AF1740]">Promo</h1>
     <div class="p-6">
-         <form action="{{ route('admin.promo') }}" method="GET" class="flex items-center">
+      <!-- form -->
+      <form action="{{ route('admin.categories.create') }}" method="POST" class="flex items-center">
+      <div class="max-w-md bg-white p-6 rounded-lg shadow-md">
+  <h2 class="text-xl font-semibold text-gray-800 mb-4">Tambah Kategori Baru</h2>
+
+  <form action="{{ route('admin.categories.store') }}" method="POST" class="space-y-5">
+    @csrf
+
+    <!-- Input Nama Kategori -->
+    <div>
+      <label for="nama_kategori" class="block text-sm font-medium text-gray-700 mb-1">
+        Nama Kategori
+      </label>
       <input
         type="text"
-        name="search"
-        value="{{ request('search') }}"
-        placeholder="Search Promo..."
-        class="border border-gray-300 rounded-lg px-3 py-1.5 text-sm focus:outline-none focus:ring focus:border-blue-300"
+        name="nama_kategori"
+        id="nama_kategori"
+        required
+        placeholder="Contoh: Minuman"
+        class="w-full border border-gray-300 rounded-lg px-4 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-[#AF1740] focus:border-transparent"
       />
-<button
-  type="submit"
-  class="ml-2 bg-[#AF1740] text-white px-3 py-1.5 rounded-lg text-sm hover:bg-[#991430]"
->
-        Search
+    </div>
+
+    <!-- Tombol Aksi -->
+    <div class="flex items-center justify-between">
+      <button
+        type="submit"
+        class="bg-[#AF1740] hover:bg-[#991430] text-white font-medium px-5 py-2 rounded-lg shadow-md transition duration-200"
+      >
+        Simpan
       </button>
-    </form>
-<p
-   class="fixed bottom-12 right-12 bg-[#AF1740] text-white px-4 py-2 rounded-lg text-sm shadow-lg hover:bg-[#991430] transition">
-   + Create Promo
-</p>
-<div class="overflow-x-auto">
-  <table class="min-w-full divide-y divide-gray-200">
-    <thead class="text-left text-sm text-gray-600 uppercase tracking-wider border-b border-gray-200">
-      <tr>
-        <th class="py-3">Created at</th>
-        <th class="py-3">Name</th>
-        <th class="py-3">Description</th>
-        <th class="py-3">Start Date</th>
-        <th class="py-3">End Date</th>
-        <th class="py-3">Action</th>
-      </tr>
-    </thead>
-    <tbody class="text-sm text-gray-800">
-      <tr class="border-b border-gray-200 hover:bg-gray-50">
-        <td class="py-3">2025-06-01</td>
-        <td class="py-3">Summer Sale</td>
-        <td class="py-3">Diskon hingga 50% untuk produk tertentu.</td>
-        <td class="py-3">2025-06-01</td>
-        <td class="py-3">2025-06-15</td>
-        <td class="py-3">
-          <button class="text-blue-600 hover:underline">Edit</button>
-          <button class="text-red-600 hover:underline ml-2">Delete</button>
-        </td>
-      </tr>
-      <tr class="border-b border-gray-200 hover:bg-gray-50">
-        <td class="py-3">2025-06-05</td>
-        <td class="py-3">Ramadan Promo</td>
-        <td class="py-3">Diskon spesial menjelang lebaran.</td>
-        <td class="py-3">2025-06-10</td>
-        <td class="py-3">2025-06-20</td>
-        <td class="py-3">
-          <button class="text-blue-600 hover:underline">Edit</button>
-          <button class="text-red-600 hover:underline ml-2">Delete</button>
-        </td>
-      </tr>
-      <!-- Tambah baris lainnya jika perlu -->
-    </tbody>
-  </table>
+      <a
+        href="{{ route('admin.categories.index') }}"
+        class="text-sm text-gray-600 hover:text-[#AF1740] hover:underline transition"
+      >
+        Batal
+      </a>
+    </div>
+  </form>
 </div>
 
-</div>
-  </div>
-  </div>
 
   <script>
     const sidebar = document.getElementById('sidebar');

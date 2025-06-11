@@ -4,6 +4,8 @@ use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Middleware\RoleMiddleware;
+use App\Http\Controllers\KategoriController;
+use App\Http\Controllers\BarangController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -81,5 +83,18 @@ Route::get('admin/products', function () {
 Route::get('admin/promo', function () {
     return view('admin.promo');
 })->name('admin.promo');
+
+// Kategori
+Route::prefix('admin/categories')->name('admin.categories.')->group(function () {
+    Route::get('/', [KategoriController::class, 'index'])->name('index');      // admin.categories.index
+    Route::get('/create', [KategoriController::class, 'create'])->name('create'); // admin.categories.create
+    Route::post('/', [KategoriController::class, 'store'])->name('store');     // admin.categories.store
+    Route::get('/{id}/edit', [KategoriController::class, 'edit'])->name('edit'); // admin.categories.edit
+    Route::put('/{id}', [KategoriController::class, 'update'])->name('update'); // admin.categories.update
+    Route::delete('/{id}', [KategoriController::class, 'destroy'])->name('destroy'); // admixn.categories.destroy
+});
+
+Route::resource('barang', BarangController::class);
+Route::resource('kategori', KategoriController::class);
 
 require __DIR__.'/auth.php';
